@@ -42,12 +42,12 @@ export default function PrescriptionExplanation({
 
   if (!isPro) {
     return (
-      <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
-        <div className="flex items-center gap-2 text-amber-700">
+      <div className="mt-4 rounded-lg border border-amber-500/20 bg-amber-500/10 p-4">
+        <div className="flex items-center gap-2 text-amber-300">
           <Sparkles size={16} />
           <span className="text-sm font-medium">AI Prescription Explanation</span>
         </div>
-        <p className="mt-1 text-sm text-amber-600">
+        <p className="mt-1 text-sm text-amber-400/80">
           Upgrade to Pro to get AI-powered explanations of your prescriptions in simple language.
         </p>
       </div>
@@ -56,21 +56,21 @@ export default function PrescriptionExplanation({
 
   return (
     <div className="mt-4">
-      <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
-        <Sparkles size={14} className="text-blue-500" />
+      <h3 className="text-sm font-medium text-slate-300 mb-2 flex items-center gap-1">
+        <Sparkles size={14} className="text-indigo-400" />
         AI Explanation
       </h3>
 
       {explanation ? (
-        <div className="rounded-lg bg-blue-50 border border-blue-100 p-4">
-          <p className="text-sm text-gray-700 whitespace-pre-line">{explanation}</p>
+        <div className="rounded-lg bg-indigo-500/10 border border-indigo-500/20 p-4">
+          <p className="text-sm text-slate-300 whitespace-pre-line">{explanation}</p>
         </div>
       ) : loading ? (
         <LoadingSpinner message="Generating explanation..." />
       ) : error ? (
-        <div className="rounded-lg bg-red-50 border border-red-100 p-3 flex items-start gap-2">
-          <AlertCircle size={16} className="text-red-500 mt-0.5 shrink-0" />
-          <p className="text-sm text-red-600">{error}</p>
+        <div className="rounded-lg bg-red-500/10 border border-red-500/20 p-3 flex items-start gap-2">
+          <AlertCircle size={16} className="text-red-400 mt-0.5 shrink-0" />
+          <p className="text-sm text-red-300">{error}</p>
         </div>
       ) : (
         <Button onClick={getExplanation} variant="secondary">

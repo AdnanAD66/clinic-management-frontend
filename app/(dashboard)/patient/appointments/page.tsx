@@ -44,23 +44,23 @@ export default function PatientAppointmentsPage() {
 
   const statusColor = (status: string) => {
     switch (status) {
-      case "completed": return "bg-green-100 text-green-700";
-      case "confirmed": return "bg-blue-100 text-blue-700";
-      default: return "bg-yellow-100 text-yellow-700";
+      case "completed": return "bg-emerald-500/20 text-emerald-300";
+      case "confirmed": return "bg-blue-500/20 text-blue-300";
+      default: return "bg-amber-500/20 text-amber-300";
     }
   };
 
   return (
     <DashboardShell allowedRoles={[ROLES.PATIENT]}>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">My Appointments</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">My Appointments</h1>
 
       {loading ? (
         <LoadingSpinner message="Loading appointments..." />
       ) : appointments.length === 0 ? (
         <Card>
           <div className="text-center py-8">
-            <Calendar size={40} className="mx-auto text-gray-300 mb-3" />
-            <p className="text-gray-500">No appointments yet.</p>
+            <Calendar size={40} className="mx-auto text-slate-500 mb-3" />
+            <p className="text-slate-400">No appointments yet.</p>
           </div>
         </Card>
       ) : (
@@ -69,10 +69,10 @@ export default function PatientAppointmentsPage() {
             <Card key={apt._id}>
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
-                  <p className="font-medium text-gray-900">
+                  <p className="font-medium text-white">
                     Dr. {apt.doctorId?.name || "Unknown"}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-slate-400">
                     {new Date(apt.date).toLocaleDateString()} at {apt.timeSlot}
                   </p>
                 </div>
@@ -83,7 +83,7 @@ export default function PatientAppointmentsPage() {
                   {apt.status === "pending" && (
                     <button
                       onClick={() => cancelAppointment(apt._id)}
-                      className="flex items-center gap-1 text-xs text-red-600 hover:text-red-800"
+                      className="flex items-center gap-1 text-xs text-red-400 hover:text-red-300"
                     >
                       <Trash2 size={14} /> Cancel
                     </button>

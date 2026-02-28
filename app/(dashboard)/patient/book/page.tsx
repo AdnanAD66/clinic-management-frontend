@@ -103,9 +103,9 @@ export default function PatientBookPage() {
     return (
       <DashboardShell allowedRoles={[ROLES.PATIENT]}>
         <div className="flex flex-col items-center justify-center py-16">
-          <CheckCircle size={48} className="text-green-500 mb-4" />
-          <h2 className="text-xl font-bold text-gray-900 mb-2">Appointment Booked!</h2>
-          <p className="text-gray-600 mb-6">
+          <CheckCircle size={48} className="text-emerald-400 mb-4" />
+          <h2 className="text-xl font-bold text-white mb-2">Appointment Booked!</h2>
+          <p className="text-slate-400 mb-6">
             Your appointment on {selectedDate} at {selectedSlot} has been confirmed.
           </p>
           <div className="flex gap-3">
@@ -125,10 +125,10 @@ export default function PatientBookPage() {
 
   return (
     <DashboardShell allowedRoles={[ROLES.PATIENT]}>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Book Appointment</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">Book Appointment</h1>
       <Card>
         {error && (
-          <div className="mb-4 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+          <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/20 p-3 text-sm text-red-300">
             {error}
           </div>
         )}
@@ -143,23 +143,23 @@ export default function PatientBookPage() {
           />
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Date <span className="text-red-500">*</span>
+            <label className="block text-sm font-medium text-slate-300 mb-1">
+              Date <span className="text-red-400">*</span>
             </label>
             <input
               type="date"
               value={selectedDate}
               min={new Date().toISOString().split("T")[0]}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
 
           {selectedDoctor && selectedDate && (
             slotsLoading ? (
-              <p className="text-sm text-gray-500">Loading available slots...</p>
+              <p className="text-sm text-slate-400">Loading available slots...</p>
             ) : availableSlots.length === 0 ? (
-              <p className="text-sm text-red-500">No available slots for this date.</p>
+              <p className="text-sm text-red-400">No available slots for this date.</p>
             ) : (
               <Select
                 label="Time Slot"

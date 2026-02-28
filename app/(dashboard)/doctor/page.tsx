@@ -43,17 +43,17 @@ export default function DoctorDashboard() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed": return "bg-green-100 text-green-700";
-      case "confirmed": return "bg-blue-100 text-blue-700";
-      default: return "bg-yellow-100 text-yellow-700";
+      case "completed": return "bg-emerald-500/20 text-emerald-300";
+      case "confirmed": return "bg-indigo-500/20 text-indigo-300";
+      default: return "bg-amber-500/20 text-amber-300";
     }
   };
 
   return (
     <DashboardShell allowedRoles={[ROLES.DOCTOR]}>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Doctor Dashboard</h1>
-        <p className="text-gray-500">Your daily overview</p>
+        <h1 className="text-2xl font-bold text-white">Doctor Dashboard</h1>
+        <p className="text-slate-400">Your daily overview</p>
       </div>
 
       {loading ? (
@@ -64,40 +64,40 @@ export default function DoctorDashboard() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <Card>
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-blue-50 p-3">
-                  <Calendar className="h-6 w-6 text-blue-600" />
+                <div className="rounded-lg bg-indigo-500/10 p-3">
+                  <Calendar className="h-6 w-6 text-indigo-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-2xl font-bold text-white">
                     {data.todayAppointments.length}
                   </p>
-                  <p className="text-sm text-gray-500">Today&apos;s Appointments</p>
+                  <p className="text-sm text-slate-400">Today&apos;s Appointments</p>
                 </div>
               </div>
             </Card>
             <Card>
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-green-50 p-3">
-                  <FileText className="h-6 w-6 text-green-600" />
+                <div className="rounded-lg bg-emerald-500/10 p-3">
+                  <FileText className="h-6 w-6 text-emerald-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-2xl font-bold text-white">
                     {data.monthlyPrescriptionCount}
                   </p>
-                  <p className="text-sm text-gray-500">Prescriptions This Month</p>
+                  <p className="text-sm text-slate-400">Prescriptions This Month</p>
                 </div>
               </div>
             </Card>
             <Card>
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-purple-50 p-3">
-                  <Activity className="h-6 w-6 text-purple-600" />
+                <div className="rounded-lg bg-purple-500/10 p-3">
+                  <Activity className="h-6 w-6 text-purple-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-2xl font-bold text-white">
                     {data.monthlyAppointmentCount}
                   </p>
-                  <p className="text-sm text-gray-500">Monthly Appointments</p>
+                  <p className="text-sm text-slate-400">Monthly Appointments</p>
                 </div>
               </div>
             </Card>
@@ -106,24 +106,24 @@ export default function DoctorDashboard() {
           {/* Today's Schedule */}
           <Card title="Today&apos;s Schedule">
             {data.todayAppointments.length === 0 ? (
-              <p className="text-gray-500 text-center py-6">No appointments scheduled for today.</p>
+              <p className="text-slate-500 text-center py-6">No appointments scheduled for today.</p>
             ) : (
               <div className="space-y-2">
                 {data.todayAppointments.map((apt) => (
                   <div
                     key={apt._id}
-                    className="flex items-center justify-between rounded-lg border border-gray-100 p-3 hover:bg-gray-50"
+                    className="flex items-center justify-between rounded-lg border border-white/5 p-3 hover:bg-white/[0.03]"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1.5 text-gray-500">
+                      <div className="flex items-center gap-1.5 text-slate-400">
                         <Clock size={14} />
                         <span className="text-sm font-medium">{apt.timeSlot}</span>
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium text-white">
                           {apt.patientId?.name || "Unknown Patient"}
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-slate-500">
                           {apt.patientId?.age} yrs &bull; {apt.patientId?.gender}
                         </p>
                       </div>
@@ -146,7 +146,7 @@ export default function DoctorDashboard() {
         </div>
       ) : (
         <Card>
-          <p className="text-center py-8 text-gray-500">Failed to load dashboard data.</p>
+          <p className="text-center py-8 text-slate-500">Failed to load dashboard data.</p>
         </Card>
       )}
     </DashboardShell>

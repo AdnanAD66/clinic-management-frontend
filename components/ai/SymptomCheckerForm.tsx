@@ -42,22 +42,22 @@ export default function SymptomCheckerForm({ onSubmit, loading }: SymptomChecker
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Symptoms <span className="text-red-500">*</span>
+        <label className="block text-sm font-medium text-slate-300 mb-1">
+          Symptoms <span className="text-red-400">*</span>
         </label>
         <textarea
           value={symptoms}
           onChange={(e) => setSymptoms(e.target.value)}
           placeholder="Describe the patient's symptoms in detail..."
           rows={4}
-          className={`w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-1 ${
+          className={`w-full rounded-lg border bg-white/5 px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 ${
             errors.symptoms
-              ? "border-red-300 focus:border-red-500 focus:ring-red-500"
-              : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              ? "border-red-500/50 focus:border-red-500 focus:ring-red-500"
+              : "border-white/10 focus:border-indigo-500 focus:ring-indigo-500"
           }`}
         />
         {errors.symptoms && (
-          <p className="mt-1 text-xs text-red-500">{errors.symptoms}</p>
+          <p className="mt-1 text-xs text-red-400">{errors.symptoms}</p>
         )}
       </div>
 
@@ -83,7 +83,7 @@ export default function SymptomCheckerForm({ onSubmit, loading }: SymptomChecker
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-slate-300 mb-1">
           Medical History
         </label>
         <textarea
@@ -91,7 +91,7 @@ export default function SymptomCheckerForm({ onSubmit, loading }: SymptomChecker
           onChange={(e) => setHistory(e.target.value)}
           placeholder="Any relevant medical history (allergies, chronic conditions, etc.)..."
           rows={3}
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
         />
       </div>
 

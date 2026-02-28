@@ -65,21 +65,21 @@ export default function DoctorAppointmentsPage() {
 
   const statusColor = (status?: string) => {
     switch (status) {
-      case "completed": return "bg-green-100 text-green-700";
-      case "confirmed": return "bg-blue-100 text-blue-700";
-      default: return "bg-yellow-100 text-yellow-700";
+      case "completed": return "bg-emerald-500/20 text-emerald-300";
+      case "confirmed": return "bg-indigo-500/20 text-indigo-300";
+      default: return "bg-amber-500/20 text-amber-300";
     }
   };
 
   return (
     <DashboardShell allowedRoles={[ROLES.DOCTOR]}>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">My Schedule</h1>
+        <h1 className="text-2xl font-bold text-white">My Schedule</h1>
         <input
           type="date"
           value={dateFilter}
           onChange={(e) => setDateFilter(e.target.value)}
-          className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+          className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white"
         />
       </div>
 
@@ -91,16 +91,16 @@ export default function DoctorAppointmentsPage() {
             <Card key={slot.timeSlot}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Clock size={16} className="text-gray-400" />
-                  <span className="font-mono text-sm font-medium text-gray-700 w-14">
+                  <Clock size={16} className="text-slate-500" />
+                  <span className="font-mono text-sm font-medium text-slate-300 w-14">
                     {slot.timeSlot}
                   </span>
                   {slot.available ? (
-                    <span className="text-sm text-gray-400">Available</span>
+                    <span className="text-sm text-slate-500">Available</span>
                   ) : (
                     <Link
                       href={`/doctor/patients/${slot.patientId}`}
-                      className="text-sm font-medium text-blue-600 hover:underline flex items-center gap-1"
+                      className="text-sm font-medium text-indigo-400 hover:underline flex items-center gap-1"
                     >
                       <User size={14} />
                       {slot.patientName}

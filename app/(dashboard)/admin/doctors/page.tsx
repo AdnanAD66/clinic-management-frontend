@@ -73,11 +73,11 @@ export default function AdminDoctorsPage() {
     <DashboardShell allowedRoles={[ROLES.ADMIN]}>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <Stethoscope className="h-7 w-7 text-blue-600" />
+          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+            <Stethoscope className="h-7 w-7 text-indigo-400" />
             Manage Doctors
           </h1>
-          <p className="text-gray-500">Add or remove doctor accounts</p>
+          <p className="text-slate-400">Add or remove doctor accounts</p>
         </div>
         <Button onClick={() => setShowForm(!showForm)}>
           {showForm ? <X size={16} className="mr-1" /> : <Plus size={16} className="mr-1" />}
@@ -88,7 +88,7 @@ export default function AdminDoctorsPage() {
       {showForm && (
         <Card className="mb-6">
           <form onSubmit={handleAdd} className="space-y-4">
-            <h3 className="font-semibold text-gray-900">New Doctor</h3>
+            <h3 className="font-semibold text-white">New Doctor</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <Input
                 label="Full Name"
@@ -127,30 +127,30 @@ export default function AdminDoctorsPage() {
       ) : (
         <Card>
           {doctors.length === 0 ? (
-            <p className="text-center py-8 text-gray-500">No doctors registered.</p>
+            <p className="text-center py-8 text-slate-500">No doctors registered.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-200 text-left">
-                    <th className="pb-3 font-medium text-gray-500">Name</th>
-                    <th className="pb-3 font-medium text-gray-500">Email</th>
-                    <th className="pb-3 font-medium text-gray-500">Joined</th>
-                    <th className="pb-3 font-medium text-gray-500">Action</th>
+                  <tr className="border-b border-white/10 text-left">
+                    <th className="pb-3 font-medium text-slate-400">Name</th>
+                    <th className="pb-3 font-medium text-slate-400">Email</th>
+                    <th className="pb-3 font-medium text-slate-400">Joined</th>
+                    <th className="pb-3 font-medium text-slate-400">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {doctors.map((doc) => (
-                    <tr key={doc._id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 font-medium text-gray-900">{doc.name}</td>
-                      <td className="py-3 text-gray-600">{doc.email}</td>
-                      <td className="py-3 text-gray-600">
+                    <tr key={doc._id} className="border-b border-white/5 hover:bg-white/[0.03]">
+                      <td className="py-3 font-medium text-white">{doc.name}</td>
+                      <td className="py-3 text-slate-400">{doc.email}</td>
+                      <td className="py-3 text-slate-400">
                         {new Date(doc.createdAt).toLocaleDateString()}
                       </td>
                       <td className="py-3">
                         <button
                           onClick={() => handleDelete(doc._id, doc.name)}
-                          className="rounded-lg border border-red-200 p-1.5 text-red-500 hover:bg-red-50 transition-colors"
+                          className="rounded-lg border border-red-500/20 p-1.5 text-red-400 hover:bg-red-500/10 transition-colors"
                         >
                           <Trash2 size={14} />
                         </button>

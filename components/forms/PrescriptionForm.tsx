@@ -67,18 +67,18 @@ export default function PrescriptionForm({ onSubmit, loading }: PrescriptionForm
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+        <div className="rounded-lg bg-red-500/10 border border-red-500/20 p-3 text-sm text-red-400">
           {error}
         </div>
       )}
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium text-gray-700">Medicines</h3>
+          <h3 className="text-sm font-medium text-slate-300">Medicines</h3>
           <button
             type="button"
             onClick={addMedicine}
-            className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800"
+            className="flex items-center gap-1 text-sm text-indigo-400 hover:text-indigo-300"
           >
             <Plus size={16} /> Add Medicine
           </button>
@@ -87,17 +87,17 @@ export default function PrescriptionForm({ onSubmit, loading }: PrescriptionForm
         {medicines.map((med, index) => (
           <div
             key={index}
-            className="rounded-lg border border-gray-200 p-4 space-y-3"
+            className="rounded-lg border border-white/[0.06] p-4 space-y-3"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-gray-500">
+              <span className="text-xs font-medium text-slate-500">
                 Medicine #{index + 1}
               </span>
               {medicines.length > 1 && (
                 <button
                   type="button"
                   onClick={() => removeMedicine(index)}
-                  className="text-red-500 hover:text-red-700"
+                  className="text-red-400 hover:text-red-300"
                 >
                   <Trash2 size={16} />
                 </button>
@@ -139,14 +139,14 @@ export default function PrescriptionForm({ onSubmit, loading }: PrescriptionForm
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-slate-300 mb-1">
           Instructions / Notes
         </label>
         <textarea
           value={instructions}
           onChange={(e) => setInstructions(e.target.value)}
           rows={3}
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
           placeholder="Additional instructions for the patient..."
         />
       </div>

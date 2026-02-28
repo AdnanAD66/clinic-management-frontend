@@ -63,20 +63,20 @@ export default function PatientDashboard() {
   return (
     <DashboardShell allowedRoles={[ROLES.PATIENT]}>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">My Profile</h1>
-        <p className="text-gray-500">Welcome back, {user?.name}</p>
+        <h1 className="text-2xl font-bold text-white">My Profile</h1>
+        <p className="text-slate-400">Welcome back, {user?.name}</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Card title="Profile Information" className="lg:col-span-1">
           <div className="flex flex-col items-center gap-4">
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-blue-100">
-              <User className="h-10 w-10 text-blue-600" />
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-indigo-500/15">
+              <User className="h-10 w-10 text-indigo-400" />
             </div>
             <div className="text-center">
-              <p className="text-lg font-semibold text-gray-900">{user?.name}</p>
-              <p className="text-sm text-gray-500">{user?.email}</p>
-              <span className="mt-2 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-medium capitalize text-blue-700">
+              <p className="text-lg font-semibold text-white">{user?.name}</p>
+              <p className="text-sm text-slate-400">{user?.email}</p>
+              <span className="mt-2 inline-block rounded-full bg-indigo-500/20 px-3 py-1 text-xs font-medium capitalize text-indigo-300">
                 {user?.subscriptionPlan} Plan
               </span>
             </div>
@@ -86,23 +86,23 @@ export default function PatientDashboard() {
         <div className="lg:col-span-2 flex flex-col gap-4">
           <Card>
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-blue-50 p-3">
-                <Calendar className="h-6 w-6 text-blue-600" />
+              <div className="rounded-lg bg-indigo-500/10 p-3">
+                <Calendar className="h-6 w-6 text-indigo-400" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900">{appointmentCount}</p>
-                <p className="text-sm text-gray-500">Total Appointments</p>
+                <p className="text-2xl font-bold text-white">{appointmentCount}</p>
+                <p className="text-sm text-slate-400">Total Appointments</p>
               </div>
             </div>
           </Card>
           <Card>
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-green-50 p-3">
-                <FileText className="h-6 w-6 text-green-600" />
+              <div className="rounded-lg bg-emerald-500/10 p-3">
+                <FileText className="h-6 w-6 text-emerald-400" />
               </div>
               <div>
-                <p className="text-2xl font-bold text-gray-900">{prescriptionCount}</p>
-                <p className="text-sm text-gray-500">Total Prescriptions</p>
+                <p className="text-2xl font-bold text-white">{prescriptionCount}</p>
+                <p className="text-sm text-slate-400">Total Prescriptions</p>
               </div>
             </div>
           </Card>
@@ -111,7 +111,7 @@ export default function PatientDashboard() {
 
       {/* Medical Timeline */}
       <div className="mt-8">
-        <h2 className="text-lg font-bold text-gray-900 mb-4">Medical History</h2>
+        <h2 className="text-lg font-bold text-white mb-4">Medical History</h2>
         {loading ? (
           <LoadingSpinner message="Loading history..." />
         ) : (

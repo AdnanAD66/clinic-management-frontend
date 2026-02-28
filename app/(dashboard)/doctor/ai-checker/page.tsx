@@ -63,24 +63,24 @@ export default function DoctorAICheckerPage() {
   const getRiskColor = (level?: string) => {
     switch (level?.toLowerCase()) {
       case "high":
-        return "bg-red-100 text-red-700 border-red-200";
+        return "bg-red-500/15 text-red-300 border-red-500/20";
       case "medium":
-        return "bg-yellow-100 text-yellow-700 border-yellow-200";
+        return "bg-amber-500/15 text-amber-300 border-amber-500/20";
       case "low":
-        return "bg-green-100 text-green-700 border-green-200";
+        return "bg-emerald-500/15 text-emerald-300 border-emerald-500/20";
       default:
-        return "bg-gray-100 text-gray-700 border-gray-200";
+        return "bg-white/5 text-slate-300 border-white/10";
     }
   };
 
   return (
     <DashboardShell allowedRoles={[ROLES.DOCTOR]}>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <Brain className="h-7 w-7 text-blue-600" />
+        <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <Brain className="h-7 w-7 text-indigo-400" />
           AI Symptom Checker
         </h1>
-        <p className="text-gray-500">
+        <p className="text-slate-400">
           Enter patient symptoms for AI-powered analysis and recommendations
         </p>
       </div>
@@ -124,8 +124,8 @@ export default function DoctorAICheckerPage() {
                           className="flex items-center justify-between rounded-lg border border-gray-100 p-3"
                         >
                           <div className="flex items-center gap-2">
-                            <Activity size={16} className="text-blue-500" />
-                            <span className="font-medium text-gray-900">
+                            <Activity size={16} className="text-indigo-400" />
+                            <span className="font-medium text-white">
                               {c.name}
                             </span>
                           </div>
@@ -147,10 +147,10 @@ export default function DoctorAICheckerPage() {
                       {result.suggestedTests.map((test, i) => (
                         <div
                           key={i}
-                          className="flex items-center gap-2 rounded-lg border border-gray-100 p-3"
+                          className="flex items-center gap-2 rounded-lg border border-white/5 p-3"
                         >
-                          <TestTube size={16} className="text-purple-500" />
-                          <span className="text-sm text-gray-700">{test}</span>
+                          <TestTube size={16} className="text-purple-400" />
+                          <span className="text-sm text-slate-300">{test}</span>
                         </div>
                       ))}
                     </div>
@@ -161,8 +161,8 @@ export default function DoctorAICheckerPage() {
                 {result.recommendations && (
                   <Card title="Recommendations">
                     <div className="flex items-start gap-2">
-                      <FileText size={16} className="text-green-500 mt-0.5 shrink-0" />
-                      <p className="text-sm text-gray-700">{result.recommendations}</p>
+                      <FileText size={16} className="text-emerald-400 mt-0.5 shrink-0" />
+                      <p className="text-sm text-slate-300">{result.recommendations}</p>
                     </div>
                   </Card>
                 )}
@@ -170,7 +170,7 @@ export default function DoctorAICheckerPage() {
                 {/* Raw response fallback */}
                 {result.rawResponse && (
                   <Card title="AI Response">
-                    <p className="text-sm text-gray-700 whitespace-pre-line">
+                    <p className="text-sm text-slate-300 whitespace-pre-line">
                       {result.rawResponse}
                     </p>
                   </Card>
@@ -180,8 +180,8 @@ export default function DoctorAICheckerPage() {
               <Card>
                 <div className="text-center py-8">
                   <AlertTriangle size={40} className="mx-auto text-amber-400 mb-3" />
-                  <p className="text-gray-700 font-medium">{fallbackMessage}</p>
-                  <p className="text-sm text-gray-500 mt-2">
+                  <p className="text-slate-300 font-medium">{fallbackMessage}</p>
+                  <p className="text-sm text-slate-500 mt-2">
                     You can still proceed with a manual diagnosis.
                   </p>
                 </div>
@@ -189,8 +189,8 @@ export default function DoctorAICheckerPage() {
             ) : (
               <Card>
                 <div className="text-center py-12">
-                  <Brain size={48} className="mx-auto text-gray-200 mb-3" />
-                  <p className="text-gray-400">
+                  <Brain size={48} className="mx-auto text-slate-600 mb-3" />
+                  <p className="text-slate-500">
                     Enter symptoms and click &quot;Analyze&quot; to get AI-powered results
                   </p>
                 </div>

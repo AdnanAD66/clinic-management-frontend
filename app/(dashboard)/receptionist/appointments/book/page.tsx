@@ -44,10 +44,10 @@ export default function BookAppointmentReceptionistPage() {
 
   return (
     <DashboardShell allowedRoles={[ROLES.RECEPTIONIST]}>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Book Appointment</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">Book Appointment</h1>
       <Card>
         {error && (
-          <div className="mb-4 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+          <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/20 p-3 text-sm text-red-300">
             {error}
           </div>
         )}

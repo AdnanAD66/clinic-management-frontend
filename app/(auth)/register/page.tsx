@@ -61,20 +61,20 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[#050810] px-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Stethoscope className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold text-gray-900">SmartClinic</span>
+            <Stethoscope className="h-8 w-8 text-indigo-400" />
+            <span className="text-2xl font-bold text-white">SmartClinic</span>
           </div>
-          <p className="text-gray-500">Create your patient account</p>
+          <p className="text-slate-400">Create your patient account</p>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+        <div className="rounded-xl border border-white/[0.06] bg-[#0F1629] p-8 shadow-2xl shadow-black/40">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {error && (
-              <div className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
+              <div className="rounded-lg bg-red-500/10 border border-red-500/20 p-3 text-sm text-red-400">
                 {error}
               </div>
             )}
@@ -124,9 +124,9 @@ export default function RegisterPage() {
             </Button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-gray-500">
+          <p className="mt-6 text-center text-sm text-slate-500">
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-blue-600 hover:text-blue-700">
+            <Link href="/login" className="font-medium text-indigo-400 hover:text-indigo-300">
               Sign In
             </Link>
           </p>

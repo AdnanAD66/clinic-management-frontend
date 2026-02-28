@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #2563EB;
-  --color-primary-dark: #1D4ED8;
-  --color-background: #F8FAFC;
-  --color-surface: #FFFFFF;
-  --color-text: #1E293B;
-  --color-text-secondary: #64748B;
+  --color-primary: #6366F1;
+  --color-primary-light: #818CF8;
+  --color-primary-dark: #4F46E5;
+  --color-background: #050810;
+  --color-surface: #0F1629;
+  --color-surface-hover: #1A2340;
+  --color-text: #F1F5F9;
+  --color-text-secondary: #94A3B8;
   --color-success: #10B981;
   --color-danger: #EF4444;
   --color-warning: #F59E0B;
-  --color-border: #E2E8F0;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-glow: rgba(99, 102, 241, 0.15);
 }
 
 @theme inline {
@@ -21,4 +24,41 @@ body {
   background: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* Glass effect utility */
+.glass {
+  background: rgba(15, 22, 41, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Glow ring for focus states */
+.glow-ring {
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3), 0 0 12px rgba(99, 102, 241, 0.15);
+}
+
+/* Subtle animated gradient for hero sections */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animated-gradient {
+  background: linear-gradient(-45deg, #0F1629, #1a1040, #0c1a3a, #0F1629);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Pulse glow for badges */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 4px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 12px rgba(99, 102, 241, 0.5); }
 }

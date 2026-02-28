@@ -16,17 +16,17 @@ export default function RevenueCard({
   const formatted = total.toLocaleString("en-PK");
 
   return (
-    <div className="rounded-xl border border-green-100 bg-gradient-to-br from-green-50 to-emerald-50 p-6">
+    <div className="rounded-xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-emerald-600/10 p-6">
       <div className="flex items-center gap-3">
-        <div className="rounded-lg bg-green-100 p-3">
-          <DollarSign className="h-6 w-6 text-green-600" />
+        <div className="rounded-lg bg-emerald-500/15 p-3">
+          <DollarSign className="h-6 w-6 text-emerald-400" />
         </div>
         <div>
-          <p className="text-2xl font-bold text-gray-900">Rs {formatted}</p>
-          <p className="text-sm text-gray-500">Revenue This Month</p>
+          <p className="text-2xl font-bold text-white">Rs {formatted}</p>
+          <p className="text-sm text-slate-400">Revenue This Month</p>
         </div>
       </div>
-      <p className="mt-2 text-xs text-gray-400">
+      <p className="mt-2 text-xs text-slate-500">
         Based on {count} completed appointment{count !== 1 ? "s" : ""} &times; Rs{" "}
         {revenuePerAppointment.toLocaleString("en-PK")}
       </p>

@@ -71,10 +71,10 @@ export default function Sidebar() {
             key={item.href}
             href={item.href}
             onClick={() => setMobileOpen(false)}
-            className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+            className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
               isActive
-                ? "bg-blue-50 text-blue-700"
-                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                ? "bg-indigo-500/15 text-indigo-300 shadow-sm shadow-indigo-500/10"
+                : "text-slate-400 hover:bg-white/5 hover:text-slate-200"
             }`}
           >
             {item.icon}
@@ -90,7 +90,7 @@ export default function Sidebar() {
       {/* Mobile hamburger */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="fixed left-4 top-4 z-50 rounded-lg bg-white p-2 shadow-md md:hidden"
+        className="fixed left-4 top-4 z-50 rounded-lg bg-[#0F1629] border border-white/10 p-2 shadow-lg shadow-black/30 md:hidden text-slate-300"
       >
         {mobileOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -98,20 +98,20 @@ export default function Sidebar() {
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/50 md:hidden"
+          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm md:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-40 h-full w-64 border-r border-gray-200 bg-white transition-transform md:translate-x-0 ${
+        className={`fixed left-0 top-0 z-40 h-full w-64 border-r border-white/[0.06] bg-[#0A0E1A] transition-transform md:translate-x-0 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex h-16 items-center border-b border-gray-200 px-6">
-          <Stethoscope className="h-6 w-6 text-blue-600" />
-          <span className="ml-2 text-lg font-bold text-gray-900">SmartClinic</span>
+        <div className="flex h-16 items-center border-b border-white/[0.06] px-6">
+          <Stethoscope className="h-6 w-6 text-indigo-400" />
+          <span className="ml-2 text-lg font-bold text-white">SmartClinic</span>
         </div>
         {navContent}
       </aside>

@@ -81,15 +81,15 @@ export default function PatientPrescriptionsPage() {
 
   return (
     <DashboardShell allowedRoles={[ROLES.PATIENT]}>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">My Prescriptions</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">My Prescriptions</h1>
 
       {loading ? (
         <LoadingSpinner message="Loading prescriptions..." />
       ) : prescriptions.length === 0 ? (
         <Card>
           <div className="text-center py-8">
-            <FileText size={40} className="mx-auto text-gray-300 mb-3" />
-            <p className="text-gray-500">No prescriptions yet.</p>
+            <FileText size={40} className="mx-auto text-slate-500 mb-3" />
+            <p className="text-slate-400">No prescriptions yet.</p>
           </div>
         </Card>
       ) : (
@@ -98,23 +98,23 @@ export default function PatientPrescriptionsPage() {
             <Card key={rx._id}>
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
-                  <p className="font-medium text-gray-900">
+                  <p className="font-medium text-white">
                     Dr. {rx.doctorId?.name || "Unknown"}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-slate-400">
                     {new Date(rx.createdAt).toLocaleDateString()} &bull; {rx.medicines.length} medicine(s)
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => viewDetail(rx._id)}
-                    className="flex items-center gap-1 rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
+                    className="flex items-center gap-1 rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-white/5"
                   >
                     <Eye size={14} /> View
                   </button>
                   <button
                     onClick={() => downloadPDF(rx)}
-                    className="flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700"
+                    className="flex items-center gap-1 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-500"
                   >
                     <Download size={14} /> Download PDF
                   </button>
@@ -128,11 +128,11 @@ export default function PatientPrescriptionsPage() {
       {/* Detail Modal */}
       {selectedId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto p-6">
+          <div className="bg-[#0F1629] border border-white/[0.06] rounded-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold text-gray-900">Prescription Detail</h2>
+              <h2 className="text-lg font-bold text-white">Prescription Detail</h2>
               <button onClick={() => { setSelectedId(null); setDetail(null); }}>
-                <X size={20} className="text-gray-400 hover:text-gray-600" />
+                <X size={20} className="text-slate-400 hover:text-slate-200" />
               </button>
             </div>
 
@@ -142,34 +142,34 @@ export default function PatientPrescriptionsPage() {
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <p className="text-gray-500">Doctor</p>
-                    <p className="font-medium">Dr. {detail.doctorId?.name}</p>
+                    <p className="text-slate-400">Doctor</p>
+                    <p className="font-medium text-white">Dr. {detail.doctorId?.name}</p>
                   </div>
                   <div>
-                    <p className="text-gray-500">Date</p>
-                    <p className="font-medium">{new Date(detail.createdAt).toLocaleDateString()}</p>
+                    <p className="text-slate-400">Date</p>
+                    <p className="font-medium text-white">{new Date(detail.createdAt).toLocaleDateString()}</p>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">Medicines</h3>
+                  <h3 className="text-sm font-medium text-slate-300 mb-2">Medicines</h3>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b text-left">
-                          <th className="pb-2 font-medium text-gray-500">Medicine</th>
-                          <th className="pb-2 font-medium text-gray-500">Dosage</th>
-                          <th className="pb-2 font-medium text-gray-500">Frequency</th>
-                          <th className="pb-2 font-medium text-gray-500">Duration</th>
+                        <tr className="border-b border-white/10 text-left">
+                          <th className="pb-2 font-medium text-slate-400">Medicine</th>
+                          <th className="pb-2 font-medium text-slate-400">Dosage</th>
+                          <th className="pb-2 font-medium text-slate-400">Frequency</th>
+                          <th className="pb-2 font-medium text-slate-400">Duration</th>
                         </tr>
                       </thead>
                       <tbody>
                         {detail.medicines.map((med, i) => (
-                          <tr key={i} className="border-b border-gray-100">
-                            <td className="py-2 font-medium">{med.name}</td>
-                            <td className="py-2 text-gray-600">{med.dosage}</td>
-                            <td className="py-2 text-gray-600">{med.frequency || "-"}</td>
-                            <td className="py-2 text-gray-600">{med.duration || "-"}</td>
+                          <tr key={i} className="border-b border-white/5">
+                            <td className="py-2 font-medium text-white">{med.name}</td>
+                            <td className="py-2 text-slate-400">{med.dosage}</td>
+                            <td className="py-2 text-slate-400">{med.frequency || "-"}</td>
+                            <td className="py-2 text-slate-400">{med.duration || "-"}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -179,8 +179,8 @@ export default function PatientPrescriptionsPage() {
 
                 {detail.instructions && (
                   <div>
-                    <h3 className="text-sm font-medium text-gray-700 mb-1">Instructions</h3>
-                    <p className="text-sm text-gray-600 bg-gray-50 rounded-lg p-3">{detail.instructions}</p>
+                    <h3 className="text-sm font-medium text-slate-300 mb-1">Instructions</h3>
+                    <p className="text-sm text-slate-400 bg-white/5 rounded-lg p-3">{detail.instructions}</p>
                   </div>
                 )}
 
@@ -195,7 +195,7 @@ export default function PatientPrescriptionsPage() {
                 </Button>
               </div>
             ) : (
-              <p className="text-gray-500">Failed to load prescription.</p>
+              <p className="text-slate-400">Failed to load prescription.</p>
             )}
           </div>
         </div>

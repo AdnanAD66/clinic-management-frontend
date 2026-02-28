@@ -17,17 +17,17 @@ interface MedicalTimelineProps {
 const TYPE_CONFIG = {
   appointment: {
     icon: Calendar,
-    color: "bg-blue-100 text-blue-600 border-blue-200",
+    color: "bg-indigo-500/15 text-indigo-400 border-indigo-500/20",
     label: "Appointment",
   },
   diagnosis: {
     icon: Activity,
-    color: "bg-yellow-100 text-yellow-600 border-yellow-200",
+    color: "bg-amber-500/15 text-amber-400 border-amber-500/20",
     label: "Diagnosis",
   },
   prescription: {
     icon: FileText,
-    color: "bg-green-100 text-green-600 border-green-200",
+    color: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
     label: "Prescription",
   },
 };
@@ -67,8 +67,8 @@ export default function MedicalTimeline({ events }: MedicalTimelineProps) {
             onClick={() => setFilter(f.value)}
             className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               filter === f.value
-                ? "bg-blue-600 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-indigo-600 text-white"
+                : "bg-white/5 text-slate-400 hover:bg-white/10"
             }`}
           >
             {f.label}
@@ -77,11 +77,11 @@ export default function MedicalTimeline({ events }: MedicalTimelineProps) {
       </div>
 
       {sorted.length === 0 ? (
-        <p className="text-center text-gray-500 py-8">No events to display.</p>
+        <p className="text-center text-slate-500 py-8">No events to display.</p>
       ) : (
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gray-200" />
+          <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-white/10" />
 
           <div className="space-y-4">
             {sorted.map((event, index) => {
@@ -100,7 +100,7 @@ export default function MedicalTimeline({ events }: MedicalTimelineProps) {
 
                   {/* Event card */}
                   <div
-                    className="rounded-lg border border-gray-200 bg-white p-4 cursor-pointer hover:shadow-sm transition-shadow"
+                    className="rounded-lg border border-white/[0.06] bg-[#0F1629] p-4 cursor-pointer hover:border-white/10 transition-all"
                     onClick={() => toggleExpand(index)}
                   >
                     <div className="flex items-center justify-between">
@@ -109,23 +109,23 @@ export default function MedicalTimeline({ events }: MedicalTimelineProps) {
                           <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${config.color}`}>
                             {config.label}
                           </span>
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs text-slate-500">
                             {new Date(event.date).toLocaleDateString()}
                           </span>
                         </div>
-                        <p className="mt-1 text-sm font-medium text-gray-900">
+                        <p className="mt-1 text-sm font-medium text-white">
                           {event.summary}
                         </p>
                       </div>
                       {isExpanded ? (
-                        <ChevronUp size={16} className="text-gray-400" />
+                        <ChevronUp size={16} className="text-slate-500" />
                       ) : (
-                        <ChevronDown size={16} className="text-gray-400" />
+                        <ChevronDown size={16} className="text-slate-500" />
                       )}
                     </div>
 
                     {isExpanded && (
-                      <div className="mt-3 border-t border-gray-100 pt-3 text-sm text-gray-600">
+                      <div className="mt-3 border-t border-white/5 pt-3 text-sm text-slate-400">
                         {event.type === "appointment" && (
                           <div className="space-y-1">
                             <p><strong>Doctor:</strong> {(event.details.doctorName as string) || "N/A"}</p>
