@@ -39,7 +39,7 @@ export function withAuth(
 ) {
   return async (
     request: NextRequest,
-    routeContext?: { params?: Promise<Record<string, string>> }
+    routeContext: { params: Promise<Record<string, string>> }
   ): Promise<NextResponse> => {
     const user = getUserFromRequest(request);
 
