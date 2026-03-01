@@ -27,7 +27,7 @@ export async function callGemini(prompt: string): Promise<string | null> {
       return null;
     }
 
-    const model = client.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = client.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     const result = await model.generateContent({
       contents: [{ role: "user", parts: [{ text: prompt }] }],
