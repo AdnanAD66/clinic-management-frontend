@@ -22,28 +22,22 @@ function getClient(): GoogleGenerativeAI | null {
 export async function callGemini(prompt: string): Promise<string | null> {
   try {
     const client = getClient();
-    if (!client) return null;
+    if (!client) {
+      console.error("[Gemini] No API key configured or still placeholder.");
+      return null;
+    }
 
     const model = client.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-    // 10-second timeout
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+    });
 
-    try {
-      const result = await model.generateContent({
-        contents: [{ role: "user", parts: [{ text: prompt }] }],
-      });
-      clearTimeout(timeout);
-
-      const response = result.response;
-      const text = response.text();
-      return text || null;
-    } catch {
-      clearTimeout(timeout);
-      return null;
-    }
-  } catch {
+    const response = result.response;
+    const text = response.text();
+    return text || null;
+  } catch (err) {
+    console.error("[Gemini] AI call failed:", err instanceof Error ? err.message : err);
     return null;
   }
 }
