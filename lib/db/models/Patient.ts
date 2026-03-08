@@ -5,6 +5,7 @@ export interface IPatient extends Document {
   age: number;
   gender: string;
   contact: string;
+  userId: mongoose.Types.ObjectId;
   createdBy: mongoose.Types.ObjectId;
   isRiskFlagged: boolean;
   createdAt: Date;
@@ -21,6 +22,7 @@ const PatientSchema = new Schema<IPatient>(
       enum: ["Male", "Female", "Other"],
     },
     contact: { type: String, required: [true, "Contact is required"], trim: true },
+    userId: { type: Schema.Types.ObjectId, ref: "User", default: null },
     createdBy: { type: Schema.Types.ObjectId, ref: "User" },
     isRiskFlagged: { type: Boolean, default: false },
   },

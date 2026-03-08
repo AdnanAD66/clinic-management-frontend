@@ -80,11 +80,16 @@ export default function PatientBookPage() {
     setLoading(true);
     setError("");
 
-    // If no patientId found, use the user's own userId
+    if (!patientId) {
+      setError("No patient profile found. Please contact reception to complete your registration.");
+      setLoading(false);
+      return;
+    }
+
     const res = await apiFetch("/api/appointments", {
       method: "POST",
       body: JSON.stringify({
-        patientId: patientId || user?._id,
+        patientId,
         doctorId: selectedDoctor,
         date: selectedDate,
         timeSlot: selectedSlot,

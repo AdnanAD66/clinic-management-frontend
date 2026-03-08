@@ -52,7 +52,12 @@ export function withAuth(
     }
 
     const resolvedParams = routeContext?.params ? await routeContext.params : undefined;
-    return handler(request, { user, params: resolvedParams });
+    try {
+      return await handler(request, { user, params: resolvedParams });
+    } catch (err) {
+      console.error("Route handler error:", err);
+      return errorResponse("Something went wrong. Please try again.", 500);
+    }
   };
 }
 

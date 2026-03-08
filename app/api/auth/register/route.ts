@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import connectDB from "@/lib/db/mongodb";
 import User from "@/lib/db/models/User";
+import Patient from "@/lib/db/models/Patient";
 import { signToken } from "@/lib/auth/jwt";
 import { ROLES, SUBSCRIPTION_PLANS } from "@/lib/constants";
 import type { ApiResponse } from "@/lib/types";
@@ -44,6 +45,16 @@ export async function POST(request: NextRequest) {
       password: hashedPassword,
       role: ROLES.PATIENT,
       subscriptionPlan: SUBSCRIPTION_PLANS.FREE,
+    });
+
+    // Auto-create Patient record linked to this user account
+    await Patient.create({
+      name: name.trim(),
+      age: 0,
+      gender: "Other",
+      contact: email.toLowerCase().trim(),
+      userId: user._id,
+      createdBy: user._id,
     });
 
     const token = signToken({

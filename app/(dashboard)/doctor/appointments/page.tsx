@@ -16,6 +16,7 @@ interface SlotInfo {
   appointmentId?: string;
   status?: string;
   patientId?: string;
+  isRiskFlagged?: boolean;
 }
 
 interface Appointment {
@@ -52,6 +53,7 @@ export default function DoctorAppointmentsPage() {
           appointmentId: apt?._id,
           status: apt?.status,
           patientId: apt?.patientId?._id,
+          isRiskFlagged: apt?.patientId?.isRiskFlagged,
         };
       });
       setSchedule(sched);
@@ -104,6 +106,9 @@ export default function DoctorAppointmentsPage() {
                     >
                       <User size={14} />
                       {slot.patientName}
+                      {slot.isRiskFlagged && (
+                        <AlertTriangle size={14} className="text-red-400" />
+                      )}
                     </Link>
                   )}
                 </div>

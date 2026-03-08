@@ -26,7 +26,7 @@ const handleGet: AuthenticatedHandler = async (request, { user }) => {
 
   // Patients see only their own
   if (user.role === ROLES.PATIENT) {
-    const patientRecord = await Patient.findOne({ createdBy: user.userId }).lean();
+    const patientRecord = await Patient.findOne({ userId: user.userId }).lean();
     if (patientRecord) {
       filter.patientId = (patientRecord as { _id: unknown })._id;
     } else {

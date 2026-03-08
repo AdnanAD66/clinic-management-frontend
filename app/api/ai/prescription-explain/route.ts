@@ -7,6 +7,7 @@ import { withProPlan, type AuthenticatedHandler } from "@/lib/auth/middleware";
 import { ROLES } from "@/lib/constants";
 import type { ApiResponse } from "@/lib/types";
 import { callGemini } from "@/lib/ai/gemini";
+import Patient from "@/lib/db/models/Patient";
 
 const handlePost: AuthenticatedHandler = async (request, { user }) => {
   const body = await request.json();
@@ -34,10 +35,21 @@ const handlePost: AuthenticatedHandler = async (request, { user }) => {
 
   // Ensure patient can only explain their own prescriptions
   const rx = prescription as Record<string, unknown>;
-  const rxPatientId = rx.patientId as Record<string, unknown>;
-  if (String(rxPatientId._id) !== user.userId && user.role === "patient") {
-    // For patients logged in as user accounts linked to patient records, 
-    // we allow access since the Pro plan gate already protects this
+  const rxPatientId = rx.patientId as Record<string, unknown> | null;
+  if (user.role === "patient") {
+    if (!rxPatientId) {
+      return NextResponse.json<ApiResponse>(
+        { success: false, message: "Access denied." },
+        { status: 403 }
+      );
+    }
+    const patientRecord = await Patient.findOne({ userId: user.userId }).lean();
+    if (!patientRecord || String(rxPatientId._id) !== String((patientRecord as { _id: unknown })._id)) {
+      return NextResponse.json<ApiResponse>(
+        { success: false, message: "Access denied." },
+        { status: 403 }
+      );
+    }
   }
 
   const medicines = (rx.medicines as Array<Record<string, string>>)

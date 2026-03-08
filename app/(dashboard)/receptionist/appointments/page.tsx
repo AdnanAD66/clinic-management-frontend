@@ -54,11 +54,13 @@ export default function ReceptionistAppointmentsPage() {
   }, [fetchAppointments]);
 
   const updateStatus = async (id: string, status: string) => {
-    await apiFetch(`/api/appointments/${id}`, {
+    const res = await apiFetch(`/api/appointments/${id}`, {
       method: "PUT",
       body: JSON.stringify({ status }),
     });
-    fetchAppointments();
+    if (res.success) {
+      fetchAppointments();
+    }
   };
 
   return (
@@ -112,26 +114,28 @@ export default function ReceptionistAppointmentsPage() {
                       <select
                         value={apt.status}
                         onChange={(e) => updateStatus(apt._id, e.target.value)}
-                        className={`rounded px-2 py-1 text-xs font-medium border-0 bg-transparent cursor-pointer ${
+                        className={`rounded px-2 py-1 text-xs font-medium border-0 cursor-pointer ${
                           apt.status === "completed"
                             ? "bg-emerald-500/20 text-emerald-300"
                             : apt.status === "confirmed"
                             ? "bg-indigo-500/20 text-indigo-300"
                             : "bg-amber-500/20 text-amber-300"
                         }`}
+                        style={{ backgroundColor: "transparent" }}
                       >
-                        <option value="pending">Pending</option>
-                        <option value="confirmed">Confirmed</option>
-                        <option value="completed">Completed</option>
+                        <option value="pending" className="bg-[#0F1629] text-white">Pending</option>
+                        <option value="confirmed" className="bg-[#0F1629] text-white">Confirmed</option>
+                        <option value="completed" className="bg-[#0F1629] text-white">Completed</option>
                       </select>
                     </td>
                     <td className="py-3">
                       <button
                         onClick={async () => {
-                          await apiFetch(`/api/appointments/${apt._id}`, { method: "DELETE" });
-                          fetchAppointments();
+                          if (!window.confirm("Cancel this appointment?")) return;
+                          const res = await apiFetch(`/api/appointments/${apt._id}`, { method: "DELETE" });
+                          if (res.success) fetchAppointments();
                         }}
-                        className="text-xs text-red-600 hover:text-red-800"
+                        className="text-xs text-red-400 hover:text-red-300"
                       >
                         Cancel
                       </button>

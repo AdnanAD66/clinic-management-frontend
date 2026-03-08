@@ -1,6 +1,7 @@
 // GET /api/analytics/doctor – Doctor dashboard analytics
 // Protected: doctor only
 import { NextResponse } from "next/server";
+import mongoose from "mongoose";
 import connectDB from "@/lib/db/mongodb";
 import Appointment from "@/lib/db/models/Appointment";
 import Prescription from "@/lib/db/models/Prescription";
@@ -41,7 +42,7 @@ const handleGet: AuthenticatedHandler = async (request, { user }) => {
   // Monthly appointment count
   const monthlyAppointmentCount = await Appointment.countDocuments({
     doctorId: user.userId,
-    createdAt: { $gte: startDate, $lte: endDate },
+    date: { $gte: startDate, $lte: endDate },
   });
 
   // Monthly prescription count
@@ -51,10 +52,11 @@ const handleGet: AuthenticatedHandler = async (request, { user }) => {
   });
 
   // Appointments by day (last 30 days)
+  const doctorObjectId = new mongoose.Types.ObjectId(user.userId);
   const appointmentsByDay = await Appointment.aggregate([
     {
       $match: {
-        doctorId: user.userId,
+        doctorId: doctorObjectId,
         date: { $gte: thirtyDaysAgo },
       },
     },

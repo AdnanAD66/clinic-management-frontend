@@ -20,8 +20,8 @@ const MedicineSchema = new Schema<IMedicine>(
   {
     name: { type: String, required: [true, "Medicine name is required"] },
     dosage: { type: String, required: [true, "Dosage is required"] },
-    frequency: { type: String, required: [true, "Frequency is required"] },
-    duration: { type: String, required: [true, "Duration is required"] },
+    frequency: { type: String, default: "-" },
+    duration: { type: String, default: "-" },
   },
   { _id: false }
 );

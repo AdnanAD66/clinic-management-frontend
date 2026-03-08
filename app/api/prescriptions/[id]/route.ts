@@ -24,7 +24,7 @@ const handleGet: AuthenticatedHandler = async (_request, { user, params }) => {
 
   // Patients can only view their own
   if (user.role === ROLES.PATIENT) {
-    const patientRecord = await Patient.findOne({ createdBy: user.userId }).lean();
+    const patientRecord = await Patient.findOne({ userId: user.userId }).lean();
     const presPatientId = (prescription as { patientId: { _id: { toString(): string } } }).patientId?._id?.toString();
     if (!patientRecord || presPatientId !== (patientRecord as { _id: { toString(): string } })._id.toString()) {
       return NextResponse.json<ApiResponse>(

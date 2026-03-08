@@ -24,12 +24,10 @@ const handleGet: AuthenticatedHandler = async (request, { user }) => {
 
   // Patients can only see their own appointments
   if (user.role === ROLES.PATIENT) {
-    // Find patient record linked to this user
-    const patientRecord = await Patient.findOne({ createdBy: user.userId }).lean();
+    const patientRecord = await Patient.findOne({ userId: user.userId }).lean();
     if (patientRecord) {
       filter.patientId = (patientRecord as { _id: unknown })._id;
     } else {
-      // self-registered patient without a Patient record – return empty
       return NextResponse.json<ApiResponse>({ success: true, data: [] });
     }
   }
@@ -68,10 +66,15 @@ const handlePost: AuthenticatedHandler = async (request, { user }) => {
 
   await connectDB();
 
-  // Double-booking check
+  // Double-booking check (use date range to avoid timezone issues)
+  const appointmentDate = new Date(date);
+  const dayStart = new Date(appointmentDate.getFullYear(), appointmentDate.getMonth(), appointmentDate.getDate());
+  const dayEnd = new Date(dayStart);
+  dayEnd.setDate(dayEnd.getDate() + 1);
+
   const existing = await Appointment.findOne({
     doctorId,
-    date: new Date(date),
+    date: { $gte: dayStart, $lt: dayEnd },
     timeSlot,
   });
 
@@ -85,7 +88,7 @@ const handlePost: AuthenticatedHandler = async (request, { user }) => {
   const appointment = await Appointment.create({
     patientId,
     doctorId,
-    date: new Date(date),
+    date: dayStart,
     timeSlot,
   });
 

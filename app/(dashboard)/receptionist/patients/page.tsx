@@ -25,17 +25,23 @@ export default function ReceptionistPatientsPage() {
   const { apiFetch } = useApi();
   const [patients, setPatients] = useState<Patient[]>([]);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(search), 400);
+    return () => clearTimeout(timer);
+  }, [search]);
 
   const fetchPatients = useCallback(async () => {
     setLoading(true);
-    const params = search ? `?search=${encodeURIComponent(search)}` : "";
+    const params = debouncedSearch ? `?search=${encodeURIComponent(debouncedSearch)}` : "";
     const res = await apiFetch<Patient[]>(`/api/patients${params}`);
     if (res.success && res.data) {
       setPatients(res.data);
     }
     setLoading(false);
-  }, [apiFetch, search]);
+  }, [apiFetch, debouncedSearch]);
 
   useEffect(() => {
     fetchPatients();

@@ -8,7 +8,11 @@ import type { ApiResponse } from "@/lib/types";
 
 const handleGet: AuthenticatedHandler = async (_request, { user }) => {
   await connectDB();
-  const patients = await Patient.find({ createdBy: user.userId }).lean();
+  // For patient role, find by userId link. For staff, find records they created.
+  const query = user.role === ROLES.PATIENT
+    ? { userId: user.userId }
+    : { createdBy: user.userId };
+  const patients = await Patient.find(query).lean();
   return NextResponse.json<ApiResponse>({ success: true, data: patients });
 };
 

@@ -29,13 +29,13 @@ const handleGet: AuthenticatedHandler = async () => {
 
   // Monthly appointments
   const monthlyAppointments = await Appointment.countDocuments({
-    createdAt: { $gte: startOfMonth },
+    date: { $gte: startOfMonth },
   });
 
   // Completed appointments this month for revenue
   const completedThisMonth = await Appointment.countDocuments({
     status: "completed",
-    createdAt: { $gte: startOfMonth },
+    date: { $gte: startOfMonth },
   });
   const revenue = completedThisMonth * REVENUE_PER_APPOINTMENT;
 
@@ -83,7 +83,7 @@ const handleGet: AuthenticatedHandler = async () => {
 
   // Doctor performance
   const doctorPerformance = await Appointment.aggregate([
-    { $match: { status: "completed", createdAt: { $gte: startOfMonth } } },
+    { $match: { status: "completed", date: { $gte: startOfMonth } } },
     {
       $group: {
         _id: "$doctorId",
